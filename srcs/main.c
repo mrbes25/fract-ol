@@ -30,3 +30,41 @@ void mlx_win_init(t_fractol *data)
     data->img = mlx_new_image(data->mlx, WIDTH, WIDTH);
     data->img_ptr = mlx_get_data_addr(data->img, &data->bpp, &data->sl, &data->endian);
 }
+//sets the fractal type
+int fract_comp(char **av, t_fractol *data)
+{
+    if (ft_strcmp(av[1], "mandelbrot") == 0)
+        data->fract = 0;
+    else if (ft_strcmp(av[1], "julia") == 0)
+        data->fract = 1;
+    else
+    {
+        ft_putendl("Usage /fractol \"mandelbrot\", \"julia\"");
+        return (0);
+    }
+    return (1);
+}
+
+//main function
+int main(int ac, char **av)
+{
+    t_fractol *data;
+
+    if (!(data = (t_fractol *)malloc(sizeof(t_fractol))))
+        return (-1);
+    if (ac == 2)
+    {
+        mlx_win_init(data);
+        if ((fract_comp(av, data)) == 0)
+            return (0);
+        fract_init(data);
+        mlx_hook(data->win, 6, 1L < 6, mouse_julia, data);
+        mlx_hook(data->win, 17, 0L, ft_close, data);
+        mlx_key_hook(data->win, key_hook, data);
+        mlx_mouse_hook(data->win, mouse_hook, data);
+        mlx_loop(data->mlx);
+    }
+    else
+        ft_putendl("Usage /fractol \"mandelbrot\", \"julia\", \"burningship\"");
+    return (0);
+}
