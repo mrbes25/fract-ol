@@ -9,8 +9,8 @@
 
 // ADJUSTABLES
 # define COLOR_CODE 0x0000CD
-# define SIZE 1000
-# define MAX_ITERATIONS 42
+# define SIZE 500
+# define MAX_ITERATIONS 100
 
 // KEYCODES
 # define ESC 53

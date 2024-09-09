@@ -1,59 +1,61 @@
-# Executable Names
-FRACTOL_NAME = fractol
+# Executable Name
+NAME = fractol
+
+# Compiler and CFlags
+CC	=	gcc
+CFlags	=	-Wall -Werror -Wextra
+LIBS	=	-lXext -lX11 -lm
+RM	=	rm -f
+
+# Directories
+LIB	=	./my_lib/my_lib.a
+MLX	=	./minilibX/libmlx.a
+INC	=	my_lib/ minilibX
+SRC_DIR	=	src/
+OBJ_DIR	=	obj/
 
 # Source Files
-FRACTOL_SRC = $(wildcard srcs/*.c)
+SRC	=	compute.c \
+		draw.c \
+		events.c \
+		inits.c \
+		main.c \
+		tools.c \
 
-# Object Files
-FRACTOL_OBJ = ${FRACTOL_SRC:.c=.o}
+SRCS	=	$(addprefix $(SRC_DIR), $(SRC))
 
-# Library Settings
-LIBDIR = my_lib
-LIBNAME = ft_ext
-LIBA = lib${LIBNAME}.a
-LIB_INC = -I${LIBDIR}
+# Object files
+OBJ	=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 
-# MiniLibX Settings
-MLX_DIR = minilibX
-MLX_LIB = ${MLX_DIR}/libmlx.a
-MLX_INC = -I${MLX_DIR}
-MLX_FLAGS = -lm -lz -lGL -lX11
+# Build rules
 
-# Compiler + Flags
-CC = cc
-RM = rm -f
-CFLAGS = -Wall -Wextra -Werror ${LIB_INC} ${MLX_INC}
+all:	$(MLX) $(LIB) $(NAME)
 
-# Default rule for .c to .o conversion
-.c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+$(NAME):	$(OBJ) $(MLX) $(LIB)
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX) $(LIB) $(LIBS) -o $(NAME)
 
-# Default target
-all: ${LIBDIR}/${LIBA} ${MLX_LIB} ${FRACTOL_NAME}
+$(LIB):
+	@make -sC ./my_lib
 
-# Build the my_lib library
-${LIBDIR}/${LIBA}:
-	${MAKE} -C ${LIBDIR}
+$(MLX):
+	@make -sC ./minilibX
 
-# Build the MiniLibX library
-${MLX_LIB}:
-	${MAKE} -C ${MLX_DIR}
+# Compile object files from source files
+$(OBJ_DIR)%.o:	$(SRC_DIR)%.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-# Build the fractol executable
-${FRACTOL_NAME}: ${FRACTOL_OBJ} ${LIBDIR}/${LIBA} ${MLX_LIB}
-	${CC} ${CFLAGS} -o ${FRACTOL_NAME} ${FRACTOL_OBJ} -L${LIBDIR} -l${LIBNAME} -L${MLX_DIR} -lmlx ${MLX_FLAGS}
-
-# Clean the object files
 clean:
-	${RM} ${FRACTOL_OBJ}
-	${MAKE} -C ${LIBDIR} clean
-	${MAKE} -C ${MLX_DIR} clean
+	@$(RM) -r $(OBJ_DIR)
+	@make clean -C ./minilibX
+	@make clean -C ./my_lib
 
-# Clean everything
-fclean: clean
-	${RM} ${FRACTOL_NAME}
+fclean:	clean
+	@$(RM) $(NAME)
+	@$(RM) $(MLX)
+	@$(RM) $(LIB)
 
-# Rebuild everything
-re: fclean all
+re:	fclean all
 
-.PHONY: all clean fclean re
+# Phony targets represent actions not files
+.PHONY: 				all clean fclean re
