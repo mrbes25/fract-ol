@@ -9,8 +9,9 @@
 
 // ADJUSTABLES
 # define COLOR_CODE 0x0000CD
-# define SIZE 500
-# define MAX_ITERATIONS 100
+# define WIDTH 600
+# define HEIGHT 500
+# define MAX_ITERATIONS 80
 
 // KEYCODES
 # define ESC 53
@@ -23,7 +24,7 @@
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
 
-typedef struct s_fractal
+typedef struct s_fractol
 {
 	void	*mlx;
 	void	*window;
@@ -44,34 +45,34 @@ typedef struct s_fractal
 	double	zoom;
 	char	*name;
 	int		max_iterations;
-}			t_fractal;
+}			t_fractol;
 
 // compute.c
-void	compute_mandelbrot(t_fractal *fractal);
-void	compute_julia(t_fractal *fractal);
+void	compute_mandelbrot(t_fractol *fractol);
+void	compute_julia(t_fractol *fractol);
 
 // draw.c
-int		draw_fractal(t_fractal *fractal, char *input);
-void	*draw_mandelbrot(void *fractal_void);
-void	draw_julia(t_fractal *fractal);
-void	draw_first_fractal(t_fractal *fractal, int argc, char **argv);
-void	draw_first_julia(t_fractal *fractal, int argc, char **argv);
+int		draw_fractol(t_fractol *fractol, char *input);
+void	*draw_mandelbrot(void *fractol_void);
+void	draw_julia(t_fractol *fractol);
+void	draw_first_fractol(t_fractol *fractol, int argc, char **argv);
+void	draw_first_julia(t_fractol *fractol, int argc, char **argv);
 
 // events.c
-void	zoom(t_fractal *fractal, int x, int y, int zoom);
-int		key_hook(int key_code, t_fractal *fractal);
-int		mouse_hook(int mouse_code, int x, int y, t_fractal *fractal);
+void	zoom(t_fractol *fractol, int x, int y, int zoom);
+int		key_hook(int key_code, t_fractol *fractol);
+int		mouse_hook(int mouse_code, int x, int y, t_fractol *fractol);
 
 // inits.c
-void	init_fractal(t_fractal *fractal);
-void	init_mlx(t_fractal *fractal);
+void	init_fractol(t_fractol *fractol);
+void	init_mlx(t_fractol *fractol);
 
 // main.c
 int		main(int argc, char **argv);
 
 //tools.c
-void	color_pixel(t_fractal *fractal, int x, int y, int color);
-int		exit_fractal(t_fractal *fractal);
+void	color_pixel(t_fractol *fractol, int x, int y, int color);
+int		clean_exit(t_fractol *fractol);
 double	ft_atod(char *s);
 
 #endif

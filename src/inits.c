@@ -1,23 +1,23 @@
 #include "../fractol.h"
 
-void	init_fractal(t_fractal *fractal)
+void	init_fractol(t_fractol *fractol)
 {
-	fractal->x = 0;
-	fractal->y = 0;
-	fractal->color = COLOR_CODE;
-	fractal->zoom = 300;
-	fractal->offset_x = -2.25;
-	fractal->offset_y = -1.65;
-	fractal->max_iterations = MAX_ITERATIONS;
+	fractol->x = 0;
+	fractol->y = 0;
+	fractol->color = COLOR_CODE;
+	fractol->zoom = 300;
+	fractol->offset_x = -2.25;
+	fractol->offset_y = -1.65;
+	fractol->max_iterations = MAX_ITERATIONS;
 }
 
-void	init_mlx(t_fractal *fractal)
+void	init_mlx(t_fractol *fractol)
 {
-	fractal->mlx = mlx_init();
-	fractal->window = mlx_new_window(fractal->mlx, SIZE, SIZE, "Fract-ol");
-	fractal->image = mlx_new_image(fractal->mlx, SIZE, SIZE);
-	fractal->pointer_to_image = mlx_get_data_addr(fractal->image,
-			&fractal->bits_per_pixel,
-			&fractal->size_line,
-			&fractal->endian);
+	fractol->mlx = mlx_init();
+	fractol->window = mlx_new_window(fractol->mlx, WIDTH, HEIGHT, "Fract-ol");
+	fractol->image = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
+	fractol->pointer_to_image = mlx_get_data_addr(fractol->image,
+			&fractol->bits_per_pixel,
+			&fractol->size_line,
+			&fractol->endian);
 }

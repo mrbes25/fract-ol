@@ -1,55 +1,55 @@
 #include "../fractol.h"
 
-void	compute_mandelbrot(t_fractal *fractal)
+void	compute_mandelbrot(t_fractol *fractol)
 {
 	int		i;
 	double	x_temp;
 
-	fractal->name = "mandelbrot";
+	fractol->name = "mandelbrot";
 	i = 0;
-	fractal->zx = 0.0;
-	fractal->zy = 0.0;
-	fractal->cx = (fractal->x / fractal->zoom) + fractal->offset_x;
-	fractal->cy = (fractal->y / fractal->zoom) + fractal->offset_y;
-	while (++i < fractal->max_iterations)
+	fractol->zx = 0.0;
+	fractol->zy = 0.0;
+	fractol->cx = (fractol->x / fractol->zoom) + fractol->offset_x;
+	fractol->cy = (fractol->y / fractol->zoom) + fractol->offset_y;
+	while (++i < fractol->max_iterations)
 	{
-		x_temp = fractal->zx * fractal->zx - fractal->zy * fractal->zy
-			+ fractal->cx;
-		fractal->zy = 2. * fractal->zx * fractal->zy + fractal->cy;
-		fractal->zx = x_temp;
-		if (fractal->zx * fractal->zx + fractal->zy
-			* fractal->zy >= __DBL_MAX__)
+		x_temp = fractol->zx * fractol->zx - fractol->zy * fractol->zy
+			+ fractol->cx;
+		fractol->zy = 2. * fractol->zx * fractol->zy + fractol->cy;
+		fractol->zx = x_temp;
+		if (fractol->zx * fractol->zx + fractol->zy
+			* fractol->zy >= __DBL_MAX__)
 			break ;
 	}
-	if (i == fractal->max_iterations)
-		color_pixel(fractal, fractal->x, fractal->y, 0x000000);
+	if (i == fractol->max_iterations)
+		color_pixel(fractol, fractol->x, fractol->y, 0x000000);
 	else
-		color_pixel(fractal, fractal->x, fractal->y, (fractal->color
+		color_pixel(fractol, fractol->x, fractol->y, (fractol->color
 				* i));
 }
 
-void	compute_julia(t_fractal *fractal)
+void	compute_julia(t_fractol *fractol)
 {
 	int		i;
 	double	tmp;
 
-	fractal->name = "julia";
-	fractal->zx = fractal->x / fractal->zoom + fractal->offset_x;
-	fractal->zy = fractal->y / fractal->zoom + fractal->offset_y;
+	fractol->name = "julia";
+	fractol->zx = fractol->x / fractol->zoom + fractol->offset_x;
+	fractol->zy = fractol->y / fractol->zoom + fractol->offset_y;
 	i = 0;
-	while (++i < fractal->max_iterations)
+	while (++i < fractol->max_iterations)
 	{
-		tmp = fractal->zx;
-		fractal->zx = fractal->zx * fractal->zx - fractal->zy * fractal->zy
-			+ fractal->cx;
-		fractal->zy = 2 * fractal->zy * tmp + fractal->cy;
-		if (fractal->zx * fractal->zx + fractal->zy
-			* fractal->zy >= __DBL_MAX__)
+		tmp = fractol->zx;
+		fractol->zx = fractol->zx * fractol->zx - fractol->zy * fractol->zy
+			+ fractol->cx;
+		fractol->zy = 2 * fractol->zy * tmp + fractol->cy;
+		if (fractol->zx * fractol->zx + fractol->zy
+			* fractol->zy >= __DBL_MAX__)
 			break ;
 	}
-	if (i == fractal->max_iterations)
-		color_pixel(fractal, fractal->x, fractal->y, 0x000000);
+	if (i == fractol->max_iterations)
+		color_pixel(fractol, fractol->x, fractol->y, 0x000000);
 	else
-		color_pixel(fractal, fractal->x, fractal->y, (fractal->color * (i
+		color_pixel(fractol, fractol->x, fractol->y, (fractol->color * (i
 					% 255)));
 }

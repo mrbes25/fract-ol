@@ -1,87 +1,87 @@
 #include "../fractol.h"
 
-int	draw_fractal(t_fractal *fractal, char *input)
+int	draw_fractol(t_fractol *fractol, char *input)
 {
 	if (!ft_strncmp(input, "mandelbrot", 11))
-		draw_mandelbrot(fractal);
+		draw_mandelbrot(fractol);
 	else if (!ft_strncmp(input, "julia", 6))
 	{
-		if (!fractal->cx && !fractal->cy)
+		if (!fractol->cx && !fractol->cy)
 		{
-			fractal->cx = -0.70176;
-			fractal->cy = -0.3842;
+			fractol->cx = -0.70176;
+			fractol->cy = -0.3842;
 		}
-		draw_julia(fractal);
+		draw_julia(fractol);
 	}
-	mlx_put_image_to_window(fractal->mlx, fractal->window, fractal->image, 0,
+	mlx_put_image_to_window(fractol->mlx, fractol->window, fractol->image, 0,
 		0);
 	return (0);
 }
 
-void	*draw_mandelbrot(void *fractal_void)
+void	*draw_mandelbrot(void *fractol_void)
 {
-	t_fractal	*fractal;
+	t_fractol	*fractol;
 
-	fractal = (t_fractal *)fractal_void;
-	fractal->x = 0;
-	fractal->y = 0;
-	while (fractal->x < SIZE)
+	fractol = (t_fractol *)fractol_void;
+	fractol->x = 0;
+	fractol->y = 0;
+	while (fractol->x < WIDTH)
 	{
-		while (fractal->y < SIZE)
+		while (fractol->y < HEIGHT)
 		{
-			compute_mandelbrot(fractal);
-			fractal->y++;
+			compute_mandelbrot(fractol);
+			fractol->y++;
 		}
-		fractal->x++;
-		fractal->y = 0;
+		fractol->x++;
+		fractol->y = 0;
 	}
 	return (NULL);
 }
 
-void	draw_julia(t_fractal *fractal)
+void	draw_julia(t_fractol *fractol)
 {
-	fractal->x = 0;
-	fractal->y = 0;
-	while (fractal->x < SIZE)
+	fractol->x = 0;
+	fractol->y = 0;
+	while (fractol->x < WIDTH)
 	{
-		while (fractal->y < SIZE)
+		while (fractol->y < HEIGHT)
 		{
-			compute_julia(fractal);
-			fractal->y++;
+			compute_julia(fractol);
+			fractol->y++;
 		}
-		fractal->x++;
-		fractal->y = 0;
+		fractol->x++;
+		fractol->y = 0;
 	}
 }
 
-void	draw_first_fractal(t_fractal *fractal, int argc, char **argv)
+void	draw_first_fractol(t_fractol *fractol, int argc, char **argv)
 {
 	if (argc < 2 || argc == 3 || argc > 4)
 	{
-		ft_printf("Usage: ./fractol <fractal> [<cx> <cy>]\n");
-		exit_fractal(fractal);
+		ft_printf("Usage: ./fractol <fractol> [<cx> <cy>]\n");
+		clean_exit(fractol);
 	}
 	if (!ft_strncmp(argv[1], "mandelbrot", 11))
-		draw_mandelbrot(fractal);
+		draw_mandelbrot(fractol);
 	else if (!ft_strncmp(argv[1], "julia", 6))
-		draw_first_julia(fractal, argc, argv);
-	mlx_put_image_to_window(fractal->mlx, fractal->window, fractal->image, \
+		draw_first_julia(fractol, argc, argv);
+	mlx_put_image_to_window(fractol->mlx, fractol->window, fractol->image, \
 		0, 0);
 	return ;
 }
 
-void	draw_first_julia(t_fractal *fractal, int argc, char **argv)
+void	draw_first_julia(t_fractol *fractol, int argc, char **argv)
 {
 	if (argc == 4)
 	{
-		fractal->cx = ft_atod(argv[2]);
-		fractal->cy = ft_atod(argv[3]);
+		fractol->cx = ft_atod(argv[2]);
+		fractol->cy = ft_atod(argv[3]);
 	}
 	else
 	{
-		fractal->cx = -0.70176;
-		fractal->cy = -0.3842;
+		fractol->cx = -0.70176;
+		fractol->cy = -0.3842;
 	}
-	draw_julia(fractal);
+	draw_julia(fractol);
 	return ;
 }

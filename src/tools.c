@@ -1,20 +1,20 @@
 #include "../fractol.h"
 
-void	color_pixel(t_fractal *fractal, int x, int y, int color)
+int	clean_exit(t_fractol *fractol)
+{
+	mlx_destroy_image(fractol->mlx, fractol->image);
+	mlx_destroy_window(fractol->mlx, fractol->window);
+	mlx_destroy_display(fractol->mlx);
+	free(fractol->mlx);
+	exit(EXIT_SUCCESS);
+}
+
+void	color_pixel(t_fractol *fractol, int x, int y, int color)
 {
 	int	*buffer;
 
-	buffer = fractal->pointer_to_image;
-	buffer[(y * fractal->size_line / 4) + x] = color;
-}
-
-int	exit_fractal(t_fractal *fractal)
-{
-	mlx_destroy_image(fractal->mlx, fractal->image);
-	mlx_destroy_window(fractal->mlx, fractal->window);
-	ft_printf("got this far\n");
-	exit(1);
-	return (0);
+	buffer = fractol->pointer_to_image;
+	buffer[(y * fractol->size_line / 4) + x] = color;
 }
 
 double	ft_atod(char *s)
