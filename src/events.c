@@ -40,6 +40,15 @@ int	key_hook(int key_code, t_fractol *fractol)
 	draw_fractol(fractol, fractol->name);
 	return (0);
 }
+//add function to track mouse movement for julia
+static int julia_track(int x, int y, t_fractol *fract)
+{
+    // Calculate the new value for the real and imaginary components of the Julia constant
+    fract->cx = (x - WIDTH / 2) / (0.5 * WIDTH * fract->zoom) + fract->offset_x;
+    fract->cy = (y - HEIGHT / 2) / (0.5 * HEIGHT * fract->zoom) + fract->offset_y;
+    draw_fractol(fract, fract->name); // Update and refresh the rendering with the new Julia constant values
+    return (0);
+}
 
 int	mouse_hook(int mouse_code, int x, int y, t_fractol *fractol)
 {
@@ -47,6 +56,8 @@ int	mouse_hook(int mouse_code, int x, int y, t_fractol *fractol)
 		zoom(fractol, x, y, 1);
 	else if (mouse_code == SCROLL_DOWN)
 		zoom(fractol, x, y, -1);
+	else if (mouse_code == MOUSE_MOVE && !ft_strncmp(fractol->name, "Julia", 5))
+		julia_track(x, y, fractol);
 	draw_fractol(fractol, fractol->name);
 	return (0);
 }

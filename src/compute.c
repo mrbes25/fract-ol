@@ -22,7 +22,7 @@ void	compute_mandelbrot(t_fractol *fractol)
 			break ;
 	}
 	if (i == fractol->max_iterations)
-		color_pixel(fractol, fractol->x, fractol->y, 0x000000);
+		color_pixel(fractol, fractol->x, fractol->y, BLACK);
 	else
 		color_pixel(fractol, fractol->x, fractol->y, (fractol->color
 				* i));
@@ -32,6 +32,10 @@ void	compute_julia(t_fractol *fractol)
 {
 	int		i;
 	double	tmp;
+	int colors[] = {BLACK, WHITE, RED, GREEN, BLUE, YELLOW, CYAN, MAGENTA,
+	ORANGE, PURPLE, PINK, BROWN, LIME, NAVY, TEAL, OLIVE, MAROON, SILVER,
+	GRAY, GOLD, LIGHT_BLUE, LIGHT_GREEN, LIGHT_CORAL, LIGHT_YELLOW,
+	LIGHT_CYAN, LIGHT_MAGENTA, LIGHT_ORANGE, LIGHT_PURPLE, LIGHT_PINK, LIGHT_BROWN};
 
 	fractol->name = "julia";
 	fractol->zx = fractol->x / fractol->zoom + fractol->offset_x;
@@ -48,8 +52,7 @@ void	compute_julia(t_fractol *fractol)
 			break ;
 	}
 	if (i == fractol->max_iterations)
-		color_pixel(fractol, fractol->x, fractol->y, 0x000000);
+		color_pixel(fractol, fractol->x, fractol->y, BLACK);
 	else
-		color_pixel(fractol, fractol->x, fractol->y, (fractol->color * (i
-					% 255)));
+		color_pixel(fractol, fractol->x, fractol->y, colors[i % (sizeof(colors) / sizeof(int))]);
 }

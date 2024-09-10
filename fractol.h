@@ -1,3 +1,4 @@
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
@@ -6,23 +7,57 @@
 
 # include <math.h>
 # include <stdlib.h>
+# include <X11/X.h>
 
 // ADJUSTABLES
-# define COLOR_CODE 0x0000CD
 # define WIDTH 600
 # define HEIGHT 500
 # define MAX_ITERATIONS 80
 
+// Colours
+#define BLACK           0x000000
+#define WHITE           0xFFFFFF
+#define RED             0xFF0000
+#define GREEN           0x00FF00
+#define BLUE            0x0000FF
+#define YELLOW          0xFFFF00
+#define CYAN            0x00FFFF
+#define MAGENTA         0xFF00FF
+#define ORANGE          0xFFA500
+#define PURPLE          0x800080
+#define PINK            0xFFC0CB
+#define BROWN           0xA52A2A
+#define LIME            0x00FF00
+#define NAVY            0x000080
+#define TEAL            0x008080
+#define OLIVE           0x808000
+#define MAROON          0x800000
+#define SILVER          0xC0C0C0
+#define GRAY            0x808080
+#define GOLD            0xFFD700
+#define LIGHT_BLUE      0xADD8E6
+#define LIGHT_GREEN     0x90EE90
+#define LIGHT_CORAL     0xF08080
+#define LIGHT_YELLOW    0xFFFFE0
+#define LIGHT_CYAN      0xE0FFFF
+#define LIGHT_MAGENTA   0xFF77FF
+#define LIGHT_ORANGE    0xFFDAB9
+#define LIGHT_PURPLE    0xE6E6FA
+#define LIGHT_PINK      0xFFB6C1
+#define LIGHT_BROWN     0xD2B48C
+
+
 // KEYCODES
-# define ESC 53
-# define UP 126
-# define DOWN 125
-# define LEFT 123
-# define RIGHT 124
+# define ESC 65307
+# define UP 65362
+# define DOWN 65364
+# define LEFT 65361
+# define RIGHT 65363
 
 // MOUSECODES
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
+# define MOUSE_MOVE MotionNotify
 
 typedef struct s_fractol
 {

@@ -4,10 +4,10 @@ void	init_fractol(t_fractol *fractol)
 {
 	fractol->x = 0;
 	fractol->y = 0;
-	fractol->color = COLOR_CODE;
+	fractol->color = GREEN;
 	fractol->zoom = 300;
-	fractol->offset_x = -2.25;
-	fractol->offset_y = -1.65;
+	fractol->offset_x = -1.5;
+	fractol->offset_y = -0.82;
 	fractol->max_iterations = MAX_ITERATIONS;
 }
 

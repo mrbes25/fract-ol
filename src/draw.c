@@ -6,7 +6,7 @@ int	draw_fractol(t_fractol *fractol, char *input)
 		draw_mandelbrot(fractol);
 	else if (!ft_strncmp(input, "julia", 6))
 	{
-		if (!fractol->cx && !fractol->cy)
+		if (!fractol->cx && !fractol->cy) // should exit
 		{
 			fractol->cx = -0.70176;
 			fractol->cy = -0.3842;
