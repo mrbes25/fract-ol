@@ -56,11 +56,6 @@ void	draw_julia(t_fractol *fractol)
 
 void	draw_first_fractol(t_fractol *fractol, int argc, char **argv)
 {
-	if (argc < 2 || argc == 3 || argc > 4)
-	{
-		ft_printf("Usage: ./fractol <fractol> [<cx> <cy>]\n");
-		clean_exit(fractol);
-	}
 	if (!ft_strncmp(argv[1], "mandelbrot", 11))
 		draw_mandelbrot(fractol);
 	else if (!ft_strncmp(argv[1], "julia", 6))

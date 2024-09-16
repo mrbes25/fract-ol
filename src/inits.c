@@ -1,7 +1,11 @@
 #include "../fractol.h"
 
-void	init_fractol(t_fractol *fractol)
+void	init_fractol(t_fractol *fractol, int argc)
 {
+	if (argc == 2)
+		fractol->mandelbrot = 1;
+	else
+		fractol->julia = 1;
 	fractol->x = 0;
 	fractol->y = 0;
 	fractol->color = GREEN;

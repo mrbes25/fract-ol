@@ -10,9 +10,9 @@
 # include <X11/X.h>
 
 // ADJUSTABLES
-# define WIDTH 600
-# define HEIGHT 500
-# define MAX_ITERATIONS 80
+# define WIDTH 800
+# define HEIGHT 800
+# define MAX_ITERATIONS 20
 
 // Colours
 #define BLACK           0x000000
@@ -80,6 +80,8 @@ typedef struct s_fractol
 	double	zoom;
 	char	*name;
 	int		max_iterations;
+	int		mandelbrot;
+	int		julia;
 }			t_fractol;
 
 // compute.c
@@ -97,9 +99,10 @@ void	draw_first_julia(t_fractol *fractol, int argc, char **argv);
 void	zoom(t_fractol *fractol, int x, int y, int zoom);
 int		key_hook(int key_code, t_fractol *fractol);
 int		mouse_hook(int mouse_code, int x, int y, t_fractol *fractol);
+int julia_track(int x, int y, t_fractol *fract);
 
 // inits.c
-void	init_fractol(t_fractol *fractol);
+void	init_fractol(t_fractol *fractol, int argc);
 void	init_mlx(t_fractol *fractol);
 
 // main.c
@@ -109,5 +112,6 @@ int		main(int argc, char **argv);
 void	color_pixel(t_fractol *fractol, int x, int y, int color);
 int		clean_exit(t_fractol *fractol);
 double	ft_atod(char *s);
+int error_handling(int argc, char **argv, t_fractol *fractol);
 
 #endif

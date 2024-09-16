@@ -44,3 +44,17 @@ double	ft_atod(char *s)
 	}
 	return ((integral + fractional) * sign);
 }
+
+int error_handling(int argc, char **argv, t_fractol *fractol)
+{
+	//amount of arguments
+	if (argc < 2 || argc == 3 || argc > 4)
+	{
+		ft_printf("Usage: ./fractol <fractol> [<cx> <cy>]\n");
+		return(1);
+	}
+	if (argc == 4 && (ft_strncmp(argv[1], "julia", 5) == 0))
+		fractol->julia = 1;
+
+
+}
