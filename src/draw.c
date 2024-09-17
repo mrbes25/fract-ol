@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/17 10:22:19 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/17 10:22:19 by bschmid          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../fractol.h"
 
-int	draw_fractol(t_fractol *fractol, char *input)
+int	draw_fractol(t_fractol *fractol)
 {
-	if (!ft_strncmp(input, "mandelbrot", 11))
+	if (fractol->mandelbrot == 1)
 		draw_mandelbrot(fractol);
-	else if (!ft_strncmp(input, "julia", 6))
+	else if (fractol->julia == 1)
 	{
-		if (!fractol->cx && !fractol->cy) // should exit
+		if (!fractol->cx && !fractol->cy)
 		{
 			fractol->cx = -0.70176;
 			fractol->cy = -0.3842;
@@ -56,12 +68,12 @@ void	draw_julia(t_fractol *fractol)
 
 void	draw_first_fractol(t_fractol *fractol, int argc, char **argv)
 {
-	if (!ft_strncmp(argv[1], "mandelbrot", 11))
+	if (fractol->mandelbrot == 1)
 		draw_mandelbrot(fractol);
-	else if (!ft_strncmp(argv[1], "julia", 6))
+	else if (fractol->julia == 1)
 		draw_first_julia(fractol, argc, argv);
-	mlx_put_image_to_window(fractol->mlx, fractol->window, fractol->image, \
-		0, 0);
+	mlx_put_image_to_window(fractol->mlx, fractol->window, fractol->image, 0,
+		0);
 	return ;
 }
 
@@ -73,10 +85,6 @@ void	draw_first_julia(t_fractol *fractol, int argc, char **argv)
 		fractol->cy = ft_atod(argv[3]);
 	}
 	else
-	{
-		fractol->cx = -0.70176;
-		fractol->cy = -0.3842;
-	}
-	draw_julia(fractol);
+		draw_julia(fractol);
 	return ;
 }

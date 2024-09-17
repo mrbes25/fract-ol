@@ -1,20 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/17 10:24:05 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/17 10:25:57 by bschmid          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../fractol.h"
 
 int	clean_exit(t_fractol *fractol)
 {
-	mlx_destroy_image(fractol->mlx, fractol->image);
-	mlx_destroy_window(fractol->mlx, fractol->window);
-	mlx_destroy_display(fractol->mlx);
-	free(fractol->mlx);
+	if (fractol->mlx)
+	{
+		if (fractol->pointer_to_image)
+			mlx_destroy_image(fractol->mlx, fractol->pointer_to_image);
+		if (fractol->window)
+			mlx_destroy_window(fractol->mlx, fractol->window);
+		mlx_destroy_display(fractol->mlx);
+		free(fractol->mlx);
+	}
+	free(fractol);
 	exit(EXIT_SUCCESS);
-}
-
-void	color_pixel(t_fractol *fractol, int x, int y, int color)
-{
-	int	*buffer;
-
-	buffer = fractol->pointer_to_image;
-	buffer[(y * fractol->size_line / 4) + x] = color;
 }
 
 double	ft_atod(char *s)
@@ -45,16 +55,24 @@ double	ft_atod(char *s)
 	return ((integral + fractional) * sign);
 }
 
-int error_handling(int argc, char **argv, t_fractol *fractol)
+int	arg_check(int argc, char **argv, t_fractol *fractol)
 {
-	//amount of arguments
 	if (argc < 2 || argc == 3 || argc > 4)
 	{
-		ft_printf("Usage: ./fractol <fractol> [<cx> <cy>]\n");
-		return(1);
+		ft_printf("To run Fractol use Format:\n");
+		ft_printf("mandelbrot: -- ./fractol mandelbrot\n");
+		ft_printf("julia: -- ./fractol julia <number(y)> <number(x)>\n");
+		return (1);
 	}
 	if (argc == 4 && (ft_strncmp(argv[1], "julia", 5) == 0))
 		fractol->julia = 1;
-
-
+	else if (ft_strncmp(argv[1], "mandelbrot", 10) == 0)
+		fractol->mandelbrot = 1;
+	else if (argc == 2 && (ft_strncmp(argv[1], "julia", 5) == 0))
+	{
+		ft_printf("To run Julia use Format: ");
+		ft_printf("./fractol julia <number> <number>\n");
+		return (1);
+	}
+	return (0);
 }

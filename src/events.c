@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/17 10:22:49 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/17 10:22:56 by bschmid          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../fractol.h"
 
 void	zoom(t_fractol *fractol, int x, int y, int zoom)
@@ -37,21 +49,23 @@ int	key_hook(int key_code, t_fractol *fractol)
 		fractol->offset_y -= 42 / fractol->zoom;
 	else if (key_code == DOWN)
 		fractol->offset_y += 42 / fractol->zoom;
-	draw_fractol(fractol, fractol->name);
+	draw_fractol(fractol);
 	return (0);
 }
-int julia_track(int x, int y, t_fractol *fract)
+
+int	julia_track(int x, int y, t_fractol *fract)
 {
-    // Map the mouse coordinates to the range [-2.0, 2.0]
-    double range_min = -2.0;
-    double range_max = 2.0;
-    double range_width = range_max - range_min;
+	double	range_min;
+	double	range_max;
+	double	range_width;
 
-    fract->cx = range_min + (range_width * x / WIDTH);
-    fract->cy = range_min + (range_width * y / HEIGHT);
-
-    draw_fractol(fract, fract->name); // Update and refresh the rendering with the new Julia constant values
-    return (0);
+	range_min = -2;
+	range_max = 2;
+	range_width = range_max - range_min;
+	fract->cx = range_min + (range_width * x / WIDTH);
+	fract->cy = range_min + (range_width * y / HEIGHT);
+	draw_fractol(fract);
+	return (0);
 }
 
 int	mouse_hook(int mouse_code, int x, int y, t_fractol *fractol)
@@ -60,6 +74,6 @@ int	mouse_hook(int mouse_code, int x, int y, t_fractol *fractol)
 		zoom(fractol, x, y, 1);
 	else if (mouse_code == SCROLL_DOWN)
 		zoom(fractol, x, y, -1);
-	draw_fractol(fractol, fractol->name);
+	draw_fractol(fractol);
 	return (0);
 }

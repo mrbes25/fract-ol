@@ -1,15 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   compute.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/17 10:21:45 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/17 10:21:49 by bschmid          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../fractol.h"
+
+static void	color_pixel(t_fractol *fractol, int x, int y, int color)
+{
+	int	*buffer;
+
+	buffer = fractol->pointer_to_image;
+	buffer[(y * fractol->size_line / 4) + x] = color;
+}
+
+static int	get_psychedelic_color(int iteration, int max_iterations)
+{
+	double	t;
+	int		r;
+	int		g;
+	int		b;
+
+	t = (double)iteration / max_iterations;
+	r = (int)(9 * (1 - t) * t * t * t * 255);
+	g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
+	b = (int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
+	return ((r << 16) | (g << 8) | b);
+}
+
+static int	get_glowy_color(int iteration, int max_iterations)
+{
+	double	t;
+	int		r;
+	int		g;
+	int		b;
+
+	t = (double)iteration / max_iterations;
+	r = (int)(255 * pow(t, 0.3));
+	g = (int)(255 * pow(t, 0.5));
+	b = (int)(255 * pow(t, 0.7));
+	return ((r << 16) | (g << 8) | b);
+}
 
 void	compute_mandelbrot(t_fractol *fractol)
 {
 	int		i;
 	double	x_temp;
-	int colors[] = {BLACK, WHITE, RED, GREEN, BLUE, YELLOW, CYAN, MAGENTA,
-	ORANGE, PURPLE, PINK, BROWN, LIME, NAVY, TEAL, OLIVE, MAROON, SILVER,
-	GRAY, GOLD, LIGHT_BLUE, LIGHT_GREEN, LIGHT_CORAL, LIGHT_YELLOW,
-	LIGHT_CYAN, LIGHT_MAGENTA, LIGHT_ORANGE, LIGHT_PURPLE, LIGHT_PINK, LIGHT_BROWN};
+	int		color;
 
-	fractol->name = "mandelbrot";
 	i = 0;
 	fractol->zx = 0.0;
 	fractol->zy = 0.0;
@@ -26,21 +70,18 @@ void	compute_mandelbrot(t_fractol *fractol)
 			break ;
 	}
 	if (i == fractol->max_iterations)
-		color_pixel(fractol, fractol->x, fractol->y, BLACK);
+		color = 0x000000;
 	else
-		color_pixel(fractol, fractol->x, fractol->y, colors[i % (sizeof(colors) / sizeof(int))]);
+		color = get_psychedelic_color(i, fractol->max_iterations);
+	color_pixel(fractol, fractol->x, fractol->y, color);
 }
 
 void	compute_julia(t_fractol *fractol)
 {
 	int		i;
 	double	tmp;
-	int colors[] = {BLACK, WHITE, RED, GREEN, BLUE, YELLOW, CYAN, MAGENTA,
-	ORANGE, PURPLE, PINK, BROWN, LIME, NAVY, TEAL, OLIVE, MAROON, SILVER,
-	GRAY, GOLD, LIGHT_BLUE, LIGHT_GREEN, LIGHT_CORAL, LIGHT_YELLOW,
-	LIGHT_CYAN, LIGHT_MAGENTA, LIGHT_ORANGE, LIGHT_PURPLE, LIGHT_PINK, LIGHT_BROWN};
+	int		color;
 
-	fractol->name = "julia";
 	fractol->zx = fractol->x / fractol->zoom + fractol->offset_x;
 	fractol->zy = fractol->y / fractol->zoom + fractol->offset_y;
 	i = 0;
@@ -55,7 +96,8 @@ void	compute_julia(t_fractol *fractol)
 			break ;
 	}
 	if (i == fractol->max_iterations)
-		color_pixel(fractol, fractol->x, fractol->y, BLACK);
+		color = 0x000000;
 	else
-		color_pixel(fractol, fractol->x, fractol->y, colors[i % (sizeof(colors) / sizeof(int))]);
+		color = get_glowy_color(i, fractol->max_iterations);
+	color_pixel(fractol, fractol->x, fractol->y, color);
 }

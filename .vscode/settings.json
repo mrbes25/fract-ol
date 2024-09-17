@@ -5,3 +5,8 @@
 		"string_view": "c"
 	}
 }
+{
+    "[c]": {
+        "editor.defaultFormatter": "keyhr.42-c-format"
+    },
+}
