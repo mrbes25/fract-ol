@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: bastian <bastian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:14:19 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/17 17:23:11 by bschmid          ###   ########.ch       */
+/*   Updated: 2024/09/17 22:40:33 by bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,15 @@ int	arg_check(int argc, char **argv, t_fractol *fractol)
 		return (1);
 	}
 	if (argc == 4 && (ft_strncmp(argv[1], "julia", 5) == 0))
+	{
 		fractol->julia = 1;
+		fractol->mandelbrot = 0;
+	}
 	else if (ft_strncmp(argv[1], "mandelbrot", 10) == 0)
+	{
 		fractol->mandelbrot = 1;
+		fractol->julia = 0;
+	}
 	else if (argc == 2 && (ft_strncmp(argv[1], "julia", 5) == 0))
 	{
 		ft_printf("To run Julia use Format: ");

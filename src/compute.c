@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: bastian <bastian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:21:45 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/17 10:21:49 by bschmid          ###   ########.ch       */
+/*   Updated: 2024/09/17 23:28:18 by bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	compute_mandelbrot(t_fractol *fractol)
 			break ;
 	}
 	if (i == fractol->max_iterations)
-		color = 0x000000;
+		color = 0;
 	else
 		color = get_psychedelic_color(i, fractol->max_iterations);
 	color_pixel(fractol, fractol->x, fractol->y, color);
@@ -79,8 +79,8 @@ void	compute_mandelbrot(t_fractol *fractol)
 void	compute_julia(t_fractol *fractol)
 {
 	int		i;
-	double	tmp;
 	int		color;
+	double	tmp;
 
 	fractol->zx = fractol->x / fractol->zoom + fractol->offset_x;
 	fractol->zy = fractol->y / fractol->zoom + fractol->offset_y;
@@ -96,7 +96,7 @@ void	compute_julia(t_fractol *fractol)
 			break ;
 	}
 	if (i == fractol->max_iterations)
-		color = 0x000000;
+		color = 0;
 	else
 		color = get_glowy_color(i, fractol->max_iterations);
 	color_pixel(fractol, fractol->x, fractol->y, color);

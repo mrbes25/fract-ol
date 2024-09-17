@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: bastian <bastian@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:36:33 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/17 19:36:33 by bschmid          ###   ########.ch       */
+/*   Updated: 2024/09/17 22:17:40 by bastian          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int	julia_track(int y, int x, t_fractol *fractol)
 	double	range_min;
 	double	range_max;
 	double	range_width;
-	int y;
-	int x;
 	y = fractol->y;
 	x = fractol->x;
 
