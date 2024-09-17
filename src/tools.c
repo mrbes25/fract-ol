@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 10:24:05 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/17 10:25:57 by bschmid          ###   ########.ch       */
+/*   Created: 2024/09/17 17:14:19 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/17 17:23:11 by bschmid          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 
 int	clean_exit(t_fractol *fractol)
 {
-	if (fractol->mlx)
-	{
-		if (fractol->pointer_to_image)
-			mlx_destroy_image(fractol->mlx, fractol->pointer_to_image);
-		if (fractol->window)
-			mlx_destroy_window(fractol->mlx, fractol->window);
-		mlx_destroy_display(fractol->mlx);
-		free(fractol->mlx);
-	}
-	free(fractol);
-	exit(EXIT_SUCCESS);
+	mlx_destroy_image(fractol->mlx, fractol->image);
+	mlx_destroy_window(fractol->mlx, fractol->window);
+	mlx_destroy_display(fractol->mlx);
+	free(fractol->mlx);
+    exit(EXIT_SUCCESS);
 }
 
 double	ft_atod(char *s)

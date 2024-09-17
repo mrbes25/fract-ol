@@ -6,7 +6,7 @@
 /*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 10:22:19 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/17 10:22:19 by bschmid          ###   ########.ch       */
+/*   Updated: 2024/09/17 18:54:52 by bschmid          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,7 @@ int	draw_fractol(t_fractol *fractol)
 	if (fractol->mandelbrot == 1)
 		draw_mandelbrot(fractol);
 	else if (fractol->julia == 1)
-	{
-		if (!fractol->cx && !fractol->cy)
-		{
-			fractol->cx = -0.70176;
-			fractol->cy = -0.3842;
-		}
 		draw_julia(fractol);
-	}
 	mlx_put_image_to_window(fractol->mlx, fractol->window, fractol->image, 0,
 		0);
 	return (0);
@@ -83,8 +76,7 @@ void	draw_first_julia(t_fractol *fractol, int argc, char **argv)
 	{
 		fractol->cx = ft_atod(argv[2]);
 		fractol->cy = ft_atod(argv[3]);
-	}
-	else
 		draw_julia(fractol);
+	}
 	return ;
 }

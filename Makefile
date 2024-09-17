@@ -6,7 +6,7 @@
 #    By: bschmid <marvin@42lausanne.ch>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/17 09:37:36 by bschmid           #+#    #+#              #
-#    Updated: 2024/09/17 10:05:48 by bschmid          ###   ########.fr        #
+#    Updated: 2024/09/17 17:12:49 by bschmid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Executable Name
@@ -14,7 +14,7 @@ NAME = fractol
 
 # Compiler and CFlags
 CC	=	gcc
-CFlags	=	-Wall -Werror -Wextra
+CFlags	=	-Wall -Werror -Wextra -g
 LIBS	=	-lXext -lX11 -lm
 RM	=	rm -f
 

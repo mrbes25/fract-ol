@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 10:22:49 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/17 10:22:56 by bschmid          ###   ########.ch       */
+/*   Created: 2024/09/17 19:36:33 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/17 19:36:33 by bschmid          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	zoom(t_fractol *fractol, int x, int y, int zoom)
 int	key_hook(int key_code, t_fractol *fractol)
 {
 	if (key_code == ESC)
-		exit(1);
+		clean_exit(fractol);
 	else if (key_code == LEFT)
 		fractol->offset_x -= 42 / fractol->zoom;
 	else if (key_code == RIGHT)
@@ -53,18 +53,22 @@ int	key_hook(int key_code, t_fractol *fractol)
 	return (0);
 }
 
-int	julia_track(int x, int y, t_fractol *fract)
+int	julia_track(int y, int x, t_fractol *fractol)
 {
 	double	range_min;
 	double	range_max;
 	double	range_width;
+	int y;
+	int x;
+	y = fractol->y;
+	x = fractol->x;
 
 	range_min = -2;
 	range_max = 2;
 	range_width = range_max - range_min;
-	fract->cx = range_min + (range_width * x / WIDTH);
-	fract->cy = range_min + (range_width * y / HEIGHT);
-	draw_fractol(fract);
+	fractol->cx = range_min + (range_width * x / WIDTH);
+	fractol->cy = range_min + (range_width * y / HEIGHT);
+	draw_fractol(fractol);
 	return (0);
 }
 
