@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bastian <bastian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 10:21:45 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/17 23:28:18 by bastian          ###   ########.fr       */
+/*   Created: 2024/09/26 16:43:51 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/26 16:51:38 by bschmid          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,12 @@ static void	color_pixel(t_fractol *fractol, int x, int y, int color)
 	buffer[(y * fractol->size_line / 4) + x] = color;
 }
 
-static int	get_psychedelic_color(int iteration, int max_iterations)
+static int	get_iteration_color(int iteration)
 {
-	double	t;
-	int		r;
-	int		g;
-	int		b;
+	int color;
 
-	t = (double)iteration / max_iterations;
-	r = (int)(9 * (1 - t) * t * t * t * 255);
-	g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
-	b = (int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
-	return ((r << 16) | (g << 8) | b);
+	color = (iteration * 0x05AF0B) & 0xFFFFFF;
+	return color;
 }
 
 static int	get_glowy_color(int iteration, int max_iterations)
@@ -72,7 +66,7 @@ void	compute_mandelbrot(t_fractol *fractol)
 	if (i == fractol->max_iterations)
 		color = 0;
 	else
-		color = get_psychedelic_color(i, fractol->max_iterations);
+		color = get_iteration_color(i);
 	color_pixel(fractol, fractol->x, fractol->y, color);
 }
 

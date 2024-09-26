@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bastian <bastian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 18:35:47 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/17 22:35:13 by bastian          ###   ########.fr       */
+/*   Created: 2024/09/26 16:23:36 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/26 16:23:36 by bschmid          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,5 @@ void hooks(t_fractol *fractol)
 {
 	mlx_key_hook(fractol->window, key_hook, fractol);
 	mlx_mouse_hook(fractol->window, mouse_hook, fractol);
-	if (fractol->julia == 1)
-		mlx_hook(fractol->window, MotionNotify, PointerMotionMask, julia_track, fractol);
 	mlx_hook(fractol->window, DestroyNotify, StructureNotifyMask, clean_exit, fractol);
 }

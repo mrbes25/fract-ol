@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bastian <bastian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 19:36:33 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/17 22:17:40 by bastian          ###   ########.fr       */
+/*   Created: 2024/09/26 16:23:22 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/26 16:23:22 by bschmid          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,6 @@ int	key_hook(int key_code, t_fractol *fractol)
 		fractol->offset_y -= 42 / fractol->zoom;
 	else if (key_code == DOWN)
 		fractol->offset_y += 42 / fractol->zoom;
-	draw_fractol(fractol);
-	return (0);
-}
-
-int	julia_track(int y, int x, t_fractol *fractol)
-{
-	double	range_min;
-	double	range_max;
-	double	range_width;
-	y = fractol->y;
-	x = fractol->x;
-
-	range_min = -2;
-	range_max = 2;
-	range_width = range_max - range_min;
-	fractol->cx = range_min + (range_width * x / WIDTH);
-	fractol->cy = range_min + (range_width * y / HEIGHT);
 	draw_fractol(fractol);
 	return (0);
 }

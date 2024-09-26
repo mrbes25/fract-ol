@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 19:31:54 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/17 19:35:43 by bschmid          ###   ########.ch       */
+/*   Created: 2024/09/26 16:54:05 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/26 16:54:09 by bschmid          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <stdlib.h>
 
 // ADJUSTABLES
-# define WIDTH 600
+# define WIDTH 1000
 # define HEIGHT 600
-# define MAX_ITERATIONS 20
+# define MAX_ITERATIONS 40
 
 // KEYCODES
 # define ESC 65307
@@ -74,7 +74,7 @@ void		draw_first_julia(t_fractol *fractol, int argc, char **argv);
 void		zoom(t_fractol *fractol, int x, int y, int zoom);
 int			key_hook(int key_code, t_fractol *fractol);
 int			mouse_hook(int mouse_code, int x, int y, t_fractol *fractol);
-int			julia_track(int y, int x, t_fractol *fractol);
+// int			julia_track(int y, int x, t_fractol *fractol);
 
 // inits.c
 void		init_fractol(t_fractol *fractol);
