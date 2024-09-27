@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 16:43:51 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/26 16:51:38 by bschmid          ###   ########.ch       */
+/*   Created: 2024/09/27 08:17:52 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/27 08:20:07 by bschmid          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void	color_pixel(t_fractol *fractol, int x, int y, int color)
 
 static int	get_iteration_color(int iteration)
 {
-	int color;
+	int	color;
 
 	color = (iteration * 0x05AF0B) & 0xFFFFFF;
-	return color;
+	return (color);
 }
 
 static int	get_glowy_color(int iteration, int max_iterations)

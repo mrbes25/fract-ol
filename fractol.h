@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/26 16:54:05 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/26 16:54:09 by bschmid          ###   ########.ch       */
+/*   Created: 2024/09/27 09:10:25 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/27 09:10:25 by bschmid          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 
 // ADJUSTABLES
-# define WIDTH 1000
+# define WIDTH 600
 # define HEIGHT 600
 # define MAX_ITERATIONS 40
 
@@ -79,7 +79,7 @@ int			mouse_hook(int mouse_code, int x, int y, t_fractol *fractol);
 // inits.c
 void		init_fractol(t_fractol *fractol);
 void		init_mlx(t_fractol *fractol);
-void 		hooks(t_fractol *fractol);
+void		hooks(t_fractol *fractol);
 
 // main.c
 int			main(int argc, char **argv);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bastian <bastian@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 16:54:49 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/17 22:37:49 by bastian          ###   ########.fr       */
+/*   Created: 2024/09/27 08:24:18 by bschmid           #+#    #+#             */
+/*   Updated: 2024/09/27 08:24:18 by bschmid          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_fractol	fractol;
 
 	if (arg_check(argc, argv, &fractol) == 1)
-		return(1);
+		return (1);
 	init_fractol(&fractol);
 	init_mlx(&fractol);
 	hooks(&fractol);

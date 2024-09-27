@@ -6,7 +6,7 @@
 /*   By: bschmid <bschmid@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 16:23:36 by bschmid           #+#    #+#             */
-/*   Updated: 2024/09/26 16:23:36 by bschmid          ###   ########.ch       */
+/*   Updated: 2024/09/27 08:23:16 by bschmid          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	init_fractol(t_fractol *fractol)
 	fractol->x = 0;
 	fractol->y = 0;
 	fractol->zx = 0.0;
-    fractol->zy = 0.0;
-    fractol->cx = 0.0;
-    fractol->cy = 0.0;
+	fractol->zy = 0.0;
+	fractol->cx = 0.0;
+	fractol->cy = 0.0;
 	fractol->zoom = 100;
 	fractol->offset_y = -3;
 	fractol->max_iterations = MAX_ITERATIONS;
@@ -27,9 +27,9 @@ void	init_fractol(t_fractol *fractol)
 		fractol->offset_x = -3.5;
 	else if (fractol->julia == 1)
 		fractol->offset_x = -3;
-
 }
-static void destroy_display(t_fractol *fractol)
+
+static	void	destroy_display(t_fractol *fractol)
 {
 	mlx_destroy_display(fractol->mlx);
 	free(fractol->mlx);
@@ -49,15 +49,15 @@ void	init_mlx(t_fractol *fractol)
 	{
 		mlx_destroy_window(fractol->mlx, fractol->window);
 		destroy_display(fractol);
-
 	}
 	fractol->pointer_to_image = mlx_get_data_addr(fractol->image,
 			&fractol->bits_per_pixel, &fractol->size_line, &fractol->endian);
-
 }
-void hooks(t_fractol *fractol)
+
+void	hooks(t_fractol *fractol)
 {
 	mlx_key_hook(fractol->window, key_hook, fractol);
 	mlx_mouse_hook(fractol->window, mouse_hook, fractol);
-	mlx_hook(fractol->window, DestroyNotify, StructureNotifyMask, clean_exit, fractol);
+	mlx_hook(fractol->window, DestroyNotify, StructureNotifyMask,
+		clean_exit, fractol);
 }
